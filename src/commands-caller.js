@@ -1,4 +1,5 @@
 import { client } from "./index.js";
+import { getWeather} from "./weather-api.js";
 
  export async function callCommands (){
     client.on('interactionCreate', (interaction) => {
@@ -13,11 +14,17 @@ import { client } from "./index.js";
         if(interaction.commandName === 'chamar') {
           interaction.reply('Chamando viados! @everyone');
         }
-
+        // Verifica se o comando é o "clima"
         if(interaction.commandName === 'clima') {
             const cidade = interaction.options.get('cidade');
+            
             console.log('Cidade recebida:', cidade);
+            interaction.reply(`Buscando clima para a cidade: ${cidade.value}`);
+
+            console.log(getWeather().then((weather) => {
+                interaction.followUp(`O clima em ${cidade.value} é: ${weather.condition} com temperatura de ${weather.temperature}°C e sensação térmica de ${weather.feelslike}°C. Atualizado em: ${weather.last_updated}.`);
+            }));
         }
-        
-      });
+    
+    });
 }
