@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'
 import { Client, GatewayIntentBits } from 'discord.js'
 import { registerCommands } from './register-commands.js'
-import { callCommands } from './call-comands.js'
+import { callCommands } from './commands-caller.js'
 
 dotenv.config()
 

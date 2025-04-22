@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import { REST, Routes } from 'discord.js';
+import { REST, Routes, ApplicationCommandOptionType,  } from 'discord.js';
 
 dotenv.config()
 const commands = [
@@ -10,8 +10,19 @@ const commands = [
     {
         name: "chamar",
         description: 'chamando viados',
+    },
+    {
+        name: "clima",
+        description: "mostra o clima de uma cidade",
+        options: [
+            {
+                name: "cidade",
+                description: "nome da cidade",
+                type: ApplicationCommandOptionType.String, // STRING
+                required: true,
+            },
+        ],
     }
-    
 ];
 
 const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN);

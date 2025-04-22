@@ -13,6 +13,11 @@ import { client } from "./index.js";
         if(interaction.commandName === 'chamar') {
           interaction.reply('Chamando viados! @everyone');
         }
+
+        if(interaction.commandName === 'clima') {
+            const cidade = interaction.options.get('cidade');
+            console.log('Cidade recebida:', cidade);
+        }
         
       });
 }
