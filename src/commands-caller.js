@@ -1,4 +1,5 @@
 import { client } from "./index.js";
+import { EmbedBuilder } from "discord.js";
 import { getWeather} from "./weather-api.js";
 
  export async function callCommands (){
@@ -8,7 +9,6 @@ import { getWeather} from "./weather-api.js";
         console.log('Comando recebido:', interaction.commandName);
         // Verifica se o comando é o "ping"
         if(interaction.commandName === 'ping') {
-          interaction.reply('Pong!');
         }
         // Verifica se o comando é o "chamar"
         if(interaction.commandName === 'chamar') {
@@ -16,15 +16,38 @@ import { getWeather} from "./weather-api.js";
         }
         // Verifica se o comando é o "clima"
         if(interaction.commandName === 'clima') {
-            const cidade = interaction.options.get('cidade');
-            
-            console.log('Cidade recebida:', cidade);
-            interaction.reply(`Buscando clima para a cidade: ${cidade.value}`);
-
-            console.log(getWeather().then((weather) => {
-                interaction.followUp(`O clima em ${cidade.value} é: ${weather.condition} com temperatura de ${weather.temperature}°C e sensação térmica de ${weather.feelslike}°C. Atualizado em: ${weather.last_updated}.`);
-            }));
+          let city = interaction.options.get('cidade').value;
+          city = city.charAt(0).toUpperCase() + city.slice(1);
+          getWeather(city).then((weather) => {
+            const embedWeather = new EmbedBuilder()
+              .setTitle(`Clima em ${city}, ${weather.region}`)
+              .setDescription(`Última atualização: ${weather.last_updated}`)
+              .setColor(0x0099FF)
+              .setThumbnail(`https:${weather.icon}`)
+              .addFields([
+                {
+                  name: 'Temperatura',
+                  value: weather.temperature + '°C',
+                  inline: true,
+                },
+                {
+                  name: 'Sensação Térmica',
+                  value: weather.feelsLike + '°C',
+                  inline: true,
+                },
+                {
+                  name: 'Condição',
+                  value: weather.condition,
+                  inline: true,
+                }
+              ]);
+              interaction.reply({embeds: [embedWeather]});
+          })
+          .catch((error) => {
+            console.error('Erro ao obter o clima:', error);
+            interaction.reply(`Desculpe, não consegui obter o clima para a cidade ${city}.`);
+          });
         }
-    
     });
 }
+

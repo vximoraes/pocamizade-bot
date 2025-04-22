@@ -6,13 +6,14 @@ const api = {
     base: "https://api.weatherapi.com/v1"
 };
 
-export async function getWeather() {
-    return fetch(`${api.base}/current.json?key=${api.key}&q=Vilhena&aqi=no`)
+export async function getWeather(city) {
+    console.log('Cidade recebida:', city);
+    return fetch(`${api.base}/current.json?key=${api.key}&q=${city}&aqi=no`)
         .then(response => response.json())
         .then(data => {
             const weather = {
                 temperature: data.current.temp_c,
-                feelslike: data.current.feelslike_c,
+                feelsLike: data.current.feelslike_c,
                 last_updated: data.current.last_updated,
                 condition: data.current.condition.text,
                 icon: data.current.condition.icon,
