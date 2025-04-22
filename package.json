@@ -1,0 +1,27 @@
+{
+  "name": "pocamizade-bot",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/vximoraes/pocamizade-bot#readme",
+  "bugs": {
+    "url": "https://github.com/vximoraes/pocamizade-bot/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vximoraes/pocamizade-bot.git"
+  },
+  "license": "MIT",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/index.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.18.0"
+  },
+  "devDependencies": {
+    "dotenv": "^16.5.0"
+  }
+}
