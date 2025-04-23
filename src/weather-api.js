@@ -7,7 +7,7 @@ const api = {
 };
 
 export async function getWeather(city) {
-    console.log('Cidade recebida:', city);
+    console.log('Cidade recebida pela API:', city);
     return fetch(`${api.base}/current.json?key=${api.key}&q=${city}&aqi=no`)
         .then(response => response.json())
         .then(data => {

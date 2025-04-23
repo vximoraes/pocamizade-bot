@@ -4,14 +4,6 @@ import { REST, Routes, ApplicationCommandOptionType,  } from 'discord.js';
 dotenv.config()
 const commands = [
     {
-        name: 'ping',
-        description: 'Replies with Pong!',
-    },
-    {
-        name: "chamar",
-        description: 'chamando viados',
-    },
-    {
         name: "clima",
         description: "mostra o clima de uma cidade",
         options: [
