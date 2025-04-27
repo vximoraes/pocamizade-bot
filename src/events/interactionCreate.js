@@ -5,6 +5,7 @@ export function interactionCreateEvent(client) {
         if (!interaction.isChatInputCommand()) return;
 
         const handler = handlers[interaction.commandName];
+        
         if (!handler) {
             console.error(`Nenhum handler encontrado para o comando: ${interaction.commandName}`);
             return;
