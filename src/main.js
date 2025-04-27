@@ -1,8 +1,7 @@
-import { Client, GatewayIntentBits } from 'discord.js';
-import { registerCommands } from './config/registerCommands.js'; 
-import { callCommands } from './utils/commandsCaller.js';
-import { readyEvent } from './events/ready.js'; 
-import { config } from './config/dotenv.js'; 
+import { Client, GatewayIntentBits } from "discord.js";
+import { registerCommands } from "./config/registerCommands.js";
+import { registerEvents } from "./events/index.js";
+import { config } from "./config/dotenv.js";
 
 // Inicializa o cliente do Discord
 export const client = new Client({
@@ -15,10 +14,11 @@ export const client = new Client({
     ],
 });
 
-readyEvent(client);
+// Registra eventos
+registerEvents(client);
 
+// Registra comandos no Discord
 registerCommands();
 
-callCommands();
-
+// Faz login no Discord
 client.login(config.discordToken);
